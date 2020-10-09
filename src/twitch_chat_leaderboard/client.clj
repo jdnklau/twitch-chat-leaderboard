@@ -14,20 +14,13 @@
     (accept [this t]
       (f t))))
 
-;; Testing function
-(defn echo-message [event]
-  (if (= (.getCommandType event) "PRIVMSG")
-    (let [user (.getUserName event)
-          msg (.get (.getMessage event))] ;; TODO: Check if optional is empty.
-      (println (str user ":") msg))))
-
-(defn create-client []
+(defn create-client [msg-handler]
   (let [oauth (OAuth2Credential. "twitch" (.trim (slurp ".access-token")))
         cm (.build (CredentialManagerBuilder/builder))
         em (EventManager.)]
     (.autoDiscovery em)
     (.onEvent em IRCMessageEvent
-              (consumer echo-message))
+              (consumer msg-handler))
     (-> (TwitchClientBuilder/builder)
         (.withEventManager em)
         (.withEnableChat true)
