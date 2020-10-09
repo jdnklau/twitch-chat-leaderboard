@@ -1,3 +1,8 @@
+.access-token
+.client-id
+.refresh-token
+.secret
+
 /target
 /classes
 /checkouts

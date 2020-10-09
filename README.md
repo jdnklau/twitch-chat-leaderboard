@@ -4,11 +4,16 @@ App to keep track of your most active viewers.
 
 ## Installation
 
-todo.
+Create a `.access-token` file, which only contains your respective access
+token. If you do not have an access token yet,
+create one [here](https://twitchtokengenerator.com/).
+Make sure the token has access to read your chat.
 
 ## Usage
 
-todo.
+```bash
+lein run
+```
 
 ## License
 
