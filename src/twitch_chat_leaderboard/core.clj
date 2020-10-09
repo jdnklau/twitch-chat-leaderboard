@@ -5,6 +5,7 @@
 
 (defn -main
   [& args]
+  (mh/init!)
   (let [client (client/create-client mh/message-counter!)
         chat (.getChat client)]
     (println "Hello, Twitch!")))

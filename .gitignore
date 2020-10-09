@@ -2,6 +2,7 @@
 .client-id
 .refresh-token
 .secret
+msg-count.db
 
 /target
 /classes

@@ -1,6 +1,14 @@
-(ns twitch-chat-leaderboard.message-handler)
+(ns twitch-chat-leaderboard.message-handler
+  (:require [clojure.java.io :as io]))
 
 (def database (atom {})) ; TODO: Load from file.
+
+(defn init! []
+  (if (.exists (io/file "msg-count.db"))
+    (reset! database (clojure.edn/read (java.io.PushbackReader.
+                                        (io/reader "msg-count.db"))))
+    (do (spit "msg-count.db" {})
+        (reset! database {}))))
 
 (defn echo-message [event]
   (if (= (.getCommandType event) "PRIVMSG")
@@ -22,6 +30,7 @@
       db)))
 
 (defn message-counter! [event]
-  (let [db (swap! database count-message event)]
-    (println db)
-    db))
+  (swap! database count-message event)
+  (println @database)
+  ;; FIXME: Don't save it all the time to disk, only every X seconds.
+  (spit "msg-count.db" @database))
