@@ -8,7 +8,8 @@
                  [com.github.twitch4j/twitch4j "1.1.2"]
                  [ch.qos.logback/logback-classic "1.2.3"]
                  [com.github.philippheuer.credentialmanager/credentialmanager "0.1.2"]
-                 [com.github.philippheuer.events4j/events4j-handler-reactor "0.9.0"]]
+                 [com.github.philippheuer.events4j/events4j-handler-reactor "0.9.0"]
+                 [cljfx/cljfx "1.7.10"]]
   :main ^:skip-aot twitch-chat-leaderboard.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all

@@ -29,8 +29,9 @@
       (update db user #(if % (inc %) 1))
       db)))
 
+(defn save-db []
+  (spit "msg-count.db" @database))
+
 (defn message-counter! [event]
   (swap! database count-message event)
-  (println @database)
-  ;; FIXME: Don't save it all the time to disk, only every X seconds.
-  (spit "msg-count.db" @database))
+  (println @database))
