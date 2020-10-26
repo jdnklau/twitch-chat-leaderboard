@@ -10,12 +10,6 @@
     (do (spit "msg-count.db" {})
         (reset! database {}))))
 
-(defn echo-message [event]
-  (if (= (.getCommandType event) "PRIVMSG")
-    (let [user (.getUserName event)
-          msg (.get (.getMessage event))]
-      (println (str user ":") msg))))
-
 (defn count-message
   "Increments the messages sent count in the `db` by one for the respective
    `msg-event`'s author.
@@ -33,5 +27,4 @@
   (spit "msg-count.db" @database))
 
 (defn message-counter! [event]
-  (swap! database count-message event)
-  (println @database))
+  (swap! database count-message event))
