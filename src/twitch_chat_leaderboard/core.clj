@@ -21,7 +21,7 @@
 
 (defn close-request [event client]
   (.close client)
-  (mh/save-db)
+  (mh/save-db!)
   (System/exit 0))
 
 (defn -main

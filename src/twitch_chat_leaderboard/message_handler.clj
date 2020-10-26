@@ -1,7 +1,7 @@
 (ns twitch-chat-leaderboard.message-handler
   (:require [clojure.java.io :as io]))
 
-(def database (atom {})) ; TODO: Load from file.
+(def database (atom {})) ; Call init! to load from file if exists.
 
 (defn init! []
   (if (.exists (io/file "msg-count.db"))
@@ -23,7 +23,7 @@
       (update db user #(if % (inc %) 1))
       db)))
 
-(defn save-db []
+(defn save-db! []
   (spit "msg-count.db" @database))
 
 (defn message-counter! [event]
