@@ -15,6 +15,15 @@ Make sure the token has access to read your chat.
 lein run
 ```
 
+## Todo
+
+* [ ] UI
+  * [ ] List leaderboard
+  * [ ] Add functionality to reset
+  * [ ] Add monthly reminders
+  * [ ] Ease creation/definition of access token on initial load-up
+* [ ] Switch to SQLite database
+
 ## License
 
 Copyright © 2020 Jannik Dunkelau
