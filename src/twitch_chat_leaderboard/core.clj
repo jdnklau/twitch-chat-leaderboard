@@ -1,5 +1,6 @@
 (ns twitch-chat-leaderboard.core
   (:require [twitch-chat-leaderboard.client :as client]
+            [twitch-chat-leaderboard.database :as db]
             [twitch-chat-leaderboard.message-handler :as mh]
             [cljfx.api :as fx])
   (:gen-class))
@@ -21,14 +22,14 @@
 
 (defn close-request [event client]
   (.close client)
-  (mh/save-db!)
+  (db/save-db!)
   (System/exit 0))
 
 (defn -main
   [& args]
-  (mh/init!)
+  (db/init!)
   (let [client (client/create-client mh/message-counter!)
         app (create-app #(close-request %1 client))
         renderer (fx/create-renderer
                   :middleware (fx/wrap-map-desc assoc :fx/type app))]
-    (fx/mount-renderer mh/database renderer)))
+    (fx/mount-renderer db/database renderer)))

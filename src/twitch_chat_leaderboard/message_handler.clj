@@ -1,14 +1,6 @@
 (ns twitch-chat-leaderboard.message-handler
-  (:require [clojure.java.io :as io]))
-
-(def database (atom {})) ; Call init! to load from file if exists.
-
-(defn init! []
-  (if (.exists (io/file "msg-count.db"))
-    (reset! database (clojure.edn/read (java.io.PushbackReader.
-                                        (io/reader "msg-count.db"))))
-    (do (spit "msg-count.db" {})
-        (reset! database {}))))
+  (:require [twitch-chat-leaderboard.database :refer :all]
+            [clojure.java.io :as io]))
 
 (defn count-message
   "Increments the messages sent count in the `db` by one for the respective
@@ -22,9 +14,6 @@
     (if (= command-type "PRIVMSG")
       (update db user #(if % (inc %) 1))
       db)))
-
-(defn save-db! []
-  (spit "msg-count.db" @database))
 
 (defn message-counter! [event]
   (swap! database count-message event))
