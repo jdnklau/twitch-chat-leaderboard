@@ -18,7 +18,11 @@
         "more than three chatters")
     (is (= [["jd" 20] ["ms" 15] ["pp" 10] ["rs" 10]]
            (top-chatters 3 {"jd" 20 "ms" 15 "pp" 10 "rs" 10 "js" 5}))
-        "tie for third place")))
+        "tie for third place"))
+  (testing "top 5 players"
+    (is (= [["jd" 20] ["ms" 15] ["qt" 15] ["pt" 15] ["kk" 10]]
+           (top-chatters 5 {"jd" 20 "ms" 15 "qt" 15 "pt" 15 "kk" 10}))
+        "multiple ties for 2nd place")))
 
 (deftest leader-board-map-test
   (testing "top 3 players"
@@ -42,4 +46,8 @@
         "tie for second place")
     (is (= {1 [20 #{"jd"}] 2 [15 #{"ms"}] 3 [10 #{"pp" "rs"}]}
            (leader-board 3 {"jd" 20 "ms" 15 "pp" 10 "rs" 10 "js" 5}))
-        "tie for third place")))
+        "tie for third place"))
+  (testing "top 5 players"
+    (is (= {1 [20 #{"jd"}] 2 [15 #{"ms" "qt" "pt"}] 5 [10 #{"kk"}]}
+           (leader-board 5 {"jd" 20 "ms" 15 "qt" 15 "pt" 15 "kk" 10}))
+        "multiple ties for 2nd place")))

@@ -20,7 +20,7 @@
     (if (empty? sorted)
       nil
       ;; Cannot just use take as we need to account for ties.
-      (if-let [[_ v] (nth sorted 2 false)]
+      (if-let [[_ v] (nth sorted (dec n) false)]
         (take-while (fn [[_ cnt]] (>= cnt v)) sorted)
         sorted))))
 
