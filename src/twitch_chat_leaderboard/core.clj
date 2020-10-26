@@ -18,7 +18,7 @@
              :root {:fx/type :v-box
                     :alignment :top-left
                     :children [{:fx/type :label
-                                :text (str db)}]}}}))
+                                :text (str (db/leader-board 3 db))}]}}}))
 
 (defn close-request [event client]
   (.close client)
